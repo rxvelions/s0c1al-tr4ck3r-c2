@@ -72,27 +72,109 @@
       display: block;
       margin-bottom: 15px;
     }
+    #entrada {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: "UnifrakturCook", cursive;
+      color: #ff0000;
+      text-shadow: 0 0 10px #ff0000;
+    }
+    #entrada input {
+      margin-top: 20px;
+      padding: 8px 15px;
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      background: #0a0a0a;
+      border: 1px solid #990000;
+      color: #ffcccc;
+    }
+    #entrada button {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background-color: #1a0000;
+      border: 1px solid #990000;
+      color: #ffcccc;
+      cursor: pointer;
+      font-family: "Courier New", monospace;
+    }
+    #entrada button:hover {
+      background-color: #300000;
+    }
+    #error {
+      margin-top: 10px;
+      color: #ff3333;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
-<div class="title">♱ ⛧ SATAN C3 // SISTEMA DE ATAQUE ⛧ ♱</div>
-<div class="menu">
+
+<div id="entrada">
+  <h1>♱ Bienvenido a SATAN C3 ♱</h1>
+  <p>Ingrese la clave para acceder al núcleo</p>
+  <input type="password" id="clave" placeholder="Contraseña...">
+  <button onclick="verificarClave()">Ingresar</button>
+  <div id="error"></div>
+</div>
+
+<div class="title" style="display: none;">♱ ⛧ SATAN C3 // SISTEMA DE ATAQUE ⛧ ♱</div>
+<div class="menu" style="display: none;">
   <div class="option" onclick="hackearInstagram()">♱ 01 Hackear Instagram</div>
   <div class="option" onclick="hackearWhatsApp()">♱ 02 Hackear WhatsApp</div>
 </div>
-<div class="descripcion">
+<div class="descripcion" style="display: none;">
   <span>♱ 01 Hackear Instagram:
-  Esta función ejecuta un rastreo exhaustivo sobre el perfil de Instagram especificado. El análisis abarca los encabezados de seguridad que se devuelven al consultar el usuario, identificadores cifrados únicos como tokens de sesión, cookies y el token CSRF vigente. También se extraen rutas de red como redirecciones internas, el encabezado de políticas de seguridad, encabezados de depuración del backend, IPv6 del contenedor y fecha exacta de la última respuesta del servidor. La herramienta despliega un campo de metainformación del objeto de cuenta y otros valores relacionados al entorno de red usado por la plataforma.</span>
-  
+  Esta función ejecuta un rastreo exhaustivo sobre el perfil de Instagram especificado...</span>
   <span>♱ 02 Hackear WhatsApp:
-  Esta herramienta permite escanear diversos aspectos técnicos asociados a un número de teléfono móvil. Se revela información como número de seguridad (SS), código de rastreo aleatorio, configuración IPv6 interna, estado de UPNP, dirección DMZ, MAC Address activa, ISP y servidores DNS configurados. También presenta información del tipo de red WAN, gateway, máscara de subred, puertos abiertos, fabricante del dispositivo en uso, saltos de red intermedios detectados mediante trazado ICMP y el tráfico en curso en distintos protocolos, ofreciendo un panorama técnico del objetivo.</span>
+  Esta herramienta permite escanear diversos aspectos técnicos asociados a un número...</span>
 </div>
-<div id="console">> SATAN C3 iniciado. Ingresar comando...</div>
-<div class="footer">♱ https://t.me/darkwebdb & @rxbelions on ig | versión: 2.1 ♱</div>
+<div id="console" style="display: none;">> SATAN C3 iniciado. Ingresar comando...</div>
+<div class="footer" style="display: none;">♱ https://t.me/darkwebdb & @rxbelions on ig | versión: 2.1 ♱</div>
+
 <script>
-const c = document.getElementById("console");
+function verificarClave() {
+  const clave = document.getElementById("clave").value;
+  const error = document.getElementById("error");
+  if (clave === "d3v_jewelx") {
+    error.style.color = "#00ff00";
+    error.innerText = "⛧ Contraseña correcta ⛧";
+
+    let puntos = [".", "..", "..."];
+    let i = 0;
+    let ciclos = 0;
+
+    const animar = setInterval(() => {
+      error.innerText = `⛧ Cargando${puntos[i]}`;
+      i = (i + 1) % puntos.length;
+      ciclos++;
+
+      if (ciclos === 30) { // 30 ciclos × 500ms = 15 segundos
+        clearInterval(animar);
+        document.getElementById("entrada").style.display = "none";
+        document.querySelector(".title").style.display = "block";
+        document.querySelector(".menu").style.display = "block";
+        document.querySelector(".descripcion").style.display = "block";
+        document.getElementById("console").style.display = "block";
+        document.querySelector(".footer").style.display = "block";
+      }
+    }, 500);
+  } else {
+    error.style.color = "#ff3333";
+    error.innerText = "⛧ Acceso denegado. Clave incorrecta ⛧";
+  }
+}
 
 function hackearInstagram() {
+  const c = document.getElementById("console");
   const user = prompt("Ingrese el nombre de usuario de Instagram:");
   if (!user) return;
   const token = Math.random().toString(36).substring(2);
@@ -107,6 +189,7 @@ function hackearInstagram() {
 }
 
 function hackearWhatsApp() {
+  const c = document.getElementById("console");
   const num = prompt("Ingrese el número de WhatsApp:");
   if (!num) return;
   const ipv6 = `fe80::5dcd::ef${Math.floor(Math.random()*9999)}::fb22::d9888`;
