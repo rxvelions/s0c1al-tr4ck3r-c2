@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SATAN C3 // SISTEMA DE ATAQUE</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #e6e6e6;
+      font-family: "Courier New", monospace;
+      height: 100%;
+    }
+    .title {
+      text-align: center;
+      font-size: 26px;
+      margin-top: 20px;
+      color: #ff0000;
+      text-shadow: 0 0 15px #ff0000;
+      font-family: "UnifrakturCook", cursive;
+    }
+    .menu {
+      border: 1px solid #ff0000;
+      padding: 15px;
+      max-width: 700px;
+      margin: 20px auto;
+      background-color: #0a0a0a;
+      box-shadow: 0 0 12px #990000;
+    }
+    .option {
+      margin: 10px 0;
+      cursor: pointer;
+      padding: 6px;
+      transition: background 0.2s;
+      border-left: 4px solid #990000;
+    }
+    .option:hover {
+      background-color: #1a0000;
+    }
+    #console {
+      margin: 20px auto;
+      padding: 15px;
+      background-color: #000;
+      border: 1px solid #333;
+      max-width: 700px;
+      min-height: 250px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      color: #ffcccc;
+      font-size: 13px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 30px;
+      color: #990000;
+      font-family: "UnifrakturCook", cursive;
+    }
+    .descripcion {
+      max-width: 700px;
+      margin: 20px auto;
+      color: #999;
+      font-size: 12px;
+      padding: 10px;
+      background: #111;
+      border-left: 4px solid #ff0000;
+    }
+    .descripcion span {
+      display: block;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="title">♱ ⛧ SATAN C3 // SISTEMA DE ATAQUE ⛧ ♱</div>
+<div class="menu">
+  <div class="option" onclick="hackearInstagram()">♱ 01 Hackear Instagram</div>
+  <div class="option" onclick="hackearWhatsApp()">♱ 02 Hackear WhatsApp</div>
+</div>
+<div class="descripcion">
+  <span>♱ 01 Hackear Instagram:
+  Esta función ejecuta un rastreo exhaustivo sobre el perfil de Instagram especificado. El análisis abarca los encabezados de seguridad que se devuelven al consultar el usuario, identificadores cifrados únicos como tokens de sesión, cookies y el token CSRF vigente. También se extraen rutas de red como redirecciones internas, el encabezado de políticas de seguridad, encabezados de depuración del backend, IPv6 del contenedor y fecha exacta de la última respuesta del servidor. La herramienta despliega un campo de metainformación del objeto de cuenta y otros valores relacionados al entorno de red usado por la plataforma.</span>
+  
+  <span>♱ 02 Hackear WhatsApp:
+  Esta herramienta permite escanear diversos aspectos técnicos asociados a un número de teléfono móvil. Se revela información como número de seguridad (SS), código de rastreo aleatorio, configuración IPv6 interna, estado de UPNP, dirección DMZ, MAC Address activa, ISP y servidores DNS configurados. También presenta información del tipo de red WAN, gateway, máscara de subred, puertos abiertos, fabricante del dispositivo en uso, saltos de red intermedios detectados mediante trazado ICMP y el tráfico en curso en distintos protocolos, ofreciendo un panorama técnico del objetivo.</span>
+</div>
+<div id="console">> SATAN C3 iniciado. Ingresar comando...</div>
+<div class="footer">♱ https://t.me/darkwebdb & @rxbelions on ig | versión: 2.1 ♱</div>
+<script>
+const c = document.getElementById("console");
+
+function hackearInstagram() {
+  const user = prompt("Ingrese el nombre de usuario de Instagram:");
+  if (!user) return;
+  const token = Math.random().toString(36).substring(2);
+  const ipv6 = `2a03:2880:f289:1e0:face:b00c:0:${Math.floor(Math.random()*9999)}`;
+  const csrftoken = `csrftoken=${Math.random().toString(36).substring(2, 18)}`;
+  const cuenta = `account=${crypto.randomUUID().replace(/-/g, '')}`;
+
+  c.innerText = `> Módulo: Hackeo de Instagram\n> Objetivo: @${user}\n\n[ESCANEANDO...]\n\n`;
+  setTimeout(() => {
+    c.innerText += `Headers:\n - vary: Accept-Encoding\n - set-cookie: ${csrftoken}; expires=Tue, 04-Aug-2026 02:31:59 GMT; secure\n - accept-ch: viewport-width,dpr,Sec-CH-UA-Full-Version-List\n - ipv6: ${ipv6}\n - content-security-policy: default-src *.instagram.com;\n - ${cuenta}\n - x-fb-debug: ${Math.random().toString(36).substring(2)}==\n - date: ${new Date().toLocaleString()}\n - redirect: https://instagram.com/${user}/?src=track0\n - token: ${token}\n - x-frame-options: DENY\n - x-xss-protection: 1\n - strict-transport-security: max-age=31536000;\n - alt-svc: h3=\":443\"; ma=86400\n`;
+  }, 1000);
+}
+
+function hackearWhatsApp() {
+  const num = prompt("Ingrese el número de WhatsApp:");
+  if (!num) return;
+  const ipv6 = `fe80::5dcd::ef${Math.floor(Math.random()*9999)}::fb22::d9888`;
+  const mac = Array(6).fill(0).map(() => Math.floor(Math.random()*255).toString(16).padStart(2, '0')).join(":");
+  const saltos = ["192.168.0.1", "192.168.1.1", "100.73.43.4", "host-132.12.32.167.ucom.com", "36.134.67.189"].join(" → ");
+  const dispositivos = [
+    "[HTTP] 192.168.3.1:80 => 92.28.211.234:80",
+    "[TCP] 192.168.1.1:67891 => 92.28.211.234:345",
+    "[UDP] 192.168.0.1:788 => 192.168.1.1:6657"
+  ].join("\n");
+
+  c.innerText = `> Módulo: Hackeo de WhatsApp\n> Número: ${num}\n\n[INICIANDO ESCANEO...]\n\n`;
+  setTimeout(() => {
+    c.innerText += `Número SS: ${Math.floor(1e15 + Math.random()*9e15)}\nCódigo de rastreo: ${Math.random().toString(36).substring(2,8).toUpperCase()}\nIPv6: ${ipv6}\nUPNP: Habilitado\nDMZ: 10.112.42.${Math.floor(Math.random()*255)}\nMAC: ${mac}\nISP: Ucom Universal\nDNS: 8.8.8.8\nDNS Alternativo: 1.1.1.8.1\nDNS SUFIJO: Dlink\nWAN: 100.23.10.15\nTIPO WAN: NAT Soldado\nGATEWAY: 192.168.0.1\nMÁSCARA SUBRED: 255.255.0.255\nPUERTOS UDP ABIERTOS: 8080, 80\nPUERTOS TCP ABIERTOS: 443\nFABRICANTE DEL DISPOSITIVO: WIN31-X\nICMP SALTOS: ${saltos}\nDISPOSITIVOS ACTIVOS:\n${dispositivos}`;
+  }, 1000);
+}
+</script>
+</body>
+</html>
