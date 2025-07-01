@@ -121,7 +121,7 @@
 <div id="entrada">
   <h1>†⛧ ♱ Bienvenido a SATAN C3 ♱ ⛧†</h1>
   <p>✟⛧✟ Ingrese la clave para acceder al núcleo ✟⛧✟</p>
-  <p>sistema creado por @rxbelions</p>
+  <p style="font-size: 14px;">sistema creado por @rxbelions</p>
   <input type="password" id="clave" placeholder="Contraseña...">
   <button onclick="verificarClave()">Ingresar</button>
   <div id="error"></div>
@@ -145,7 +145,9 @@
 function verificarClave() {
   const clave = document.getElementById("clave").value;
   const error = document.getElementById("error");
-  if (clave === "d3v_jewelx") {
+  const claveCorrecta = atob("ZDN2X2pld2VseA=="); // ← 'd3v_jewelx'
+
+  if (clave === claveCorrecta) {
     error.style.color = "#00ff00";
     error.innerText = "⛧ Contraseña correcta ⛧";
 
@@ -158,7 +160,7 @@ function verificarClave() {
       i = (i + 1) % puntos.length;
       ciclos++;
 
-      if (ciclos === 30) { // 30 ciclos × 500ms = 15 segundos
+      if (ciclos === 30) { // 15 segundos
         clearInterval(animar);
         document.getElementById("entrada").style.display = "none";
         document.querySelector(".title").style.display = "block";
@@ -208,5 +210,6 @@ function hackearWhatsApp() {
   }, 1000);
 }
 </script>
+
 </body>
 </html>
